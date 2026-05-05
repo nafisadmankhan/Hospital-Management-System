@@ -17,18 +17,6 @@ It includes:
 
 ---
 
-## 🧠 What I Built
-
-Instead of building isolated features, I implemented a **connected system where each module interacts with others**:
-
-* Patient → Appointment → Prescription → Pharmacy → Billing → History
-* Lab → Result → Alert → Doctor & Patient
-* Emergency → SOS → Ambulance → ER Notification
-
-👉 This reflects **real hospital flow**, not just CRUD operations.
-
----
-
 ## ⚙️ Tech Stack
 
 * **Frontend:** Next.js (App Router, TypeScript)
@@ -45,6 +33,9 @@ Instead of building isolated features, I implemented a **connected system where 
 backend/   # Laravel backend (API, business logic, database)
 bsms/      # Next.js frontend (UI, pages, components)
 ```
+
+## Prerequisites
+* [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running.
 
 ---
 
@@ -101,7 +92,7 @@ Patient history stored
 
 ---
 
-## 🚀 How to Run the Project
+## 🚀 Project Setup
 
 ### Backend (Laravel)
 
@@ -112,6 +103,44 @@ cp .env.example .env
 php artisan key:generate
 php artisan migrate
 php artisan serve
+```
+
+---
+
+### Frontend (Next.js)
+
+```bash
+cd bsms
+npm install
+npm run dev
+```
+
+---
+
+## ⚠️ Notes
+
+* PostgreSQL must be running
+* Update `.env` with correct DB credentials
+* Backend must run before frontend
+
+---
+
+## 🧠 What This Project Demonstrates
+
+* Full-stack system integration
+* API design and frontend consumption
+* Database-driven application
+* Real-world workflow modeling
+* Separation of concerns (frontend vs backend)
+
+---
+
+## 🚀 How to Run the Project
+
+### Backend (Laravel)
+
+```bash
+cd backend
 ```
 
 ---
