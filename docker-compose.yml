@@ -39,7 +39,7 @@ services:
       - "5432:5432"
 
   # Backend (Flask)
-  flask_app:
+  ml:
     build: ./ml
     container_name: hms-flask-api
     ports:
