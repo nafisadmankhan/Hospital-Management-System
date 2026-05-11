@@ -30,8 +30,8 @@ It includes:
 ## 📁 Project Structure
 
 ```bash
-backend/   # Laravel backend (API, business logic, database)
-bsms/      # Next.js frontend (UI, pages, components)
+backend/        # Laravel backend (API, business logic, database)
+frontend/       # Next.js frontend (UI, pages, components)
 ```
 
 ## Prerequisites
@@ -110,9 +110,19 @@ php artisan serve
 ### Frontend (Next.js)
 
 ```bash
-cd bsms
+cd frontend
+cp .env.local.example .env.local
 npm install
 npm run dev
+```
+
+---
+
+### Docker
+
+```bash
+# From the root: Build and start all services defined in docker-compose.yml
+docker compose up -d --build
 ```
 
 ---
@@ -132,26 +142,6 @@ npm run dev
 * Database-driven application
 * Real-world workflow modeling
 * Separation of concerns (frontend vs backend)
-
----
-
-## 🚀 How to Run the Project
-
-### Backend (Laravel)
-
-```bash
-cd backend
-```
-
----
-
-### Frontend (Next.js)
-
-```bash
-cd bsms
-npm install
-npm run dev
-```
 
 ---
 

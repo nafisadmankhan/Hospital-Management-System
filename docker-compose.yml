@@ -38,6 +38,17 @@ services:
     ports:
       - "5432:5432"
 
+  # Backend (Flask)
+  flask_app:
+    build: ./ml
+    container_name: hms-flask-api
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./ml:/app
+    environment:
+      - FLASK_ENV=development
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: hms-pgadmin
