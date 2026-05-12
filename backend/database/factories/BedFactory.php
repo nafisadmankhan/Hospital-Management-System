@@ -20,14 +20,26 @@ class BedFactory extends Factory
      */
     public function definition(): array
     {
+        $status = $this->faker->randomElement(['available', 'occupied', 'maintenance']);
+        $isOccupied = $status === 'occupied';
+
         return [
             'id' => Str::uuid(),
             'tenant_id' => 'tenant-001',
             'ward_id' => 'ward-001',
             'bed_number' => 'B-' . $this->faker->unique()->numberBetween(100, 9999),
-            'status' => $this->faker->randomElement(['available', 'occupied', 'maintenance']),
+            'status' => $status,
+
             'has_oxygen' => $this->faker->boolean(80),
+            'has_ventilator' => $this->faker->boolean(20),
+            'has_monitor' => $this->faker->boolean(40),
+
+            'current_patient_id' => $isOccupied ? 'patient-001' : null,
+            'admission_date' => $isOccupied ? now()->subDays(rand(1, 5)) : null,
+            'expected_discharge_date' => $isOccupied ? $this -> faker->dateTimeBetween('now', '+10 days') : null,
+
             'daily_rate_bdt' => 1500,
+
             'created_at' => now(),
             'updated_at' => now()
         ];

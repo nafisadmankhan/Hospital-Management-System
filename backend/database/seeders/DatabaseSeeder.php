@@ -10,8 +10,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             HmsDemoSeeder::class,
-            // AlertStressSeeder::class,
-            BedsStressSeeder::class,
         ]);
     }
 }

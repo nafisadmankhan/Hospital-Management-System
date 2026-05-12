@@ -462,26 +462,6 @@ class HmsDemoSeeder extends Seeder
             ]
         );
 
-        // should this be removed
-        
-        // DB::table('beds')->updateOrInsert(
-        //     ['id' => 'bed-A-1'],
-        //     [
-        //         'tenant_id' => $tenantId,
-        //         'ward_id' => 'ward-001',
-        //         'bed_number' => 'A-001',
-        //         'status' => 'occupied',
-        //         'has_oxygen' => true,
-        //         'has_ventilator' => false,
-        //         'has_monitor' => false,
-        //         'daily_rate_bdt' => 1500,
-        //         'current_patient_id' => 'patient-001',
-        //         'admission_date' => now()->subDay(),
-        //         'created_at' => now(),
-        //         'updated_at' => now(),
-        //     ]
-        // );
-
         DB::table('bills')->updateOrInsert(
             ['id' => 'bill-001'],
             [
