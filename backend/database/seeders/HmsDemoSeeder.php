@@ -3,16 +3,22 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Bed;
+use Database\Factories\BedFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+
+// use App\Models\BedFac;
+        
 
 class HmsDemoSeeder extends Seeder
 {
     public function run(): void
     {
         $tenantId = 'tenant-001';
-
+        
+        
         DB::table('tenants')->updateOrInsert(
             ['id' => $tenantId],
             [
@@ -148,6 +154,11 @@ class HmsDemoSeeder extends Seeder
                 'tenant_id' => null,
             ],
         ];
+
+        Bed::factory()->count(1000)->create([
+            'tenant_id' => $tenantId,
+            'ward_id' => 'ward-001'
+        ]);
 
         $userIds = [];
         foreach ($users as $record) {
@@ -451,23 +462,25 @@ class HmsDemoSeeder extends Seeder
             ]
         );
 
-        DB::table('beds')->updateOrInsert(
-            ['id' => 'bed-A-1'],
-            [
-                'tenant_id' => $tenantId,
-                'ward_id' => 'ward-001',
-                'bed_number' => 'A-001',
-                'status' => 'occupied',
-                'has_oxygen' => true,
-                'has_ventilator' => false,
-                'has_monitor' => false,
-                'daily_rate_bdt' => 1500,
-                'current_patient_id' => 'patient-001',
-                'admission_date' => now()->subDay(),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
-        );
+        // should this be removed
+        
+        // DB::table('beds')->updateOrInsert(
+        //     ['id' => 'bed-A-1'],
+        //     [
+        //         'tenant_id' => $tenantId,
+        //         'ward_id' => 'ward-001',
+        //         'bed_number' => 'A-001',
+        //         'status' => 'occupied',
+        //         'has_oxygen' => true,
+        //         'has_ventilator' => false,
+        //         'has_monitor' => false,
+        //         'daily_rate_bdt' => 1500,
+        //         'current_patient_id' => 'patient-001',
+        //         'admission_date' => now()->subDay(),
+        //         'created_at' => now(),
+        //         'updated_at' => now(),
+        //     ]
+        // );
 
         DB::table('bills')->updateOrInsert(
             ['id' => 'bill-001'],
@@ -600,13 +613,25 @@ class HmsDemoSeeder extends Seeder
 
         $series = [
             'revenue_trend' => [
-                ['Mon', 245000], ['Tue', 268000], ['Wed', 284500], ['Thu', 312000], ['Fri', 298000], ['Sat', 254000], ['Sun', 198000],
+                ['Mon', 245000],
+                ['Tue', 268000],
+                ['Wed', 284500],
+                ['Thu', 312000],
+                ['Fri', 298000],
+                ['Sat', 254000],
+                ['Sun', 198000],
             ],
             'patient_visits_trend' => [
-                ['Week 1', 820], ['Week 2', 912], ['Week 3', 875], ['Week 4', 968],
+                ['Week 1', 820],
+                ['Week 2', 912],
+                ['Week 3', 875],
+                ['Week 4', 968],
             ],
             'department_revenue' => [
-                ['Cardiology', 1420000], ['Pediatrics', 890000], ['Gynecology', 760000], ['Orthopedics', 680000],
+                ['Cardiology', 1420000],
+                ['Pediatrics', 890000],
+                ['Gynecology', 760000],
+                ['Orthopedics', 680000],
             ],
         ];
 
