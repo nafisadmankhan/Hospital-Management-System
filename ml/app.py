@@ -1,9 +1,12 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
 
-@app.route('/api/ml/test')
-def api():
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+
+@app.route('/status', methods=['GET'])
+def get_status():
     return jsonify({"message": "Hello from Flask inside Docker!"})
 
 @app.route('/')

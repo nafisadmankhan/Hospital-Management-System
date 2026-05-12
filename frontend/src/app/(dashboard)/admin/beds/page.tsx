@@ -12,6 +12,7 @@ export default function BedsPage() {
   const [wards, setWards] = useState<Ward[]>([]);
   const [beds, setBeds] = useState<Bed[]>([]);
   const [selectedWardId, setSelectedWardId] = useState<string | null>(null);
+  const [flaskMessage, setFlaskMessage] = useState('Loading Flask status...');
 
   useEffect(() => {
     Promise.all([bedAPI.listWards(), bedAPI.listBeds()]).then(([wardsRes, bedsRes]) => {
@@ -19,6 +20,16 @@ export default function BedsPage() {
       setBeds(bedsRes.data);
       if (wardsRes.data.length > 0) setSelectedWardId(wardsRes.data[0].id);
     });
+
+    fetch('http://localhost:5001/status')
+      .then(response => response.json())
+      .then(data => {
+        setFlaskMessage(data.message);
+      })
+      .catch(error => {
+        console.error('Error fetching Flask:', error);
+        setFlaskMessage('Flask server unreachable');
+      })
   }, []);
 
   const totalBeds = wards.reduce((s, w) => s + w.total_beds, 0);
@@ -73,6 +84,7 @@ export default function BedsPage() {
         <KPICard label="Occupied" value={occupiedBeds} icon={BedIcon} accentColor="critical" />
         <KPICard label="Available" value={availableBeds} icon={BedIcon} accentColor="healthy" />
         <KPICard label="Occupancy Rate" value={`${overallOccupancy}%`} icon={Users} accentColor="borderline" />
+        <KPICard label="Flask Message" value={`${flaskMessage}%`} icon={Users} accentColor="borderline" />
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -109,8 +121,8 @@ export default function BedsPage() {
                     ward.occupancy_rate >= 90
                       ? 'bg-critical'
                       : ward.occupancy_rate >= 75
-                      ? 'bg-borderline'
-                      : 'bg-healthy',
+                        ? 'bg-borderline'
+                        : 'bg-healthy',
                   )}
                   style={{ width: `${ward.occupancy_rate}%` }}
                 />
