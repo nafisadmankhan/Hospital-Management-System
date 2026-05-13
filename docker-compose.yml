@@ -48,6 +48,9 @@ services:
       - ./ml:/app
     environment:
       - FLASK_ENV=development
+      - DATABASE_URL=postgresql://user:password@db:5432/hospital_management
+    depends_on:
+      - db 
 
   pgadmin:
     image: dpage/pgadmin4
